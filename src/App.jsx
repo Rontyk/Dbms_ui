@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import "./responsive.css";
 
 const API = "http://localhost:8080/api";
 
@@ -143,9 +144,6 @@ function Num({ val, color, label, ico }) {
   );
 }
 
-// ============================================================================
-// FRIENDS — discover, request, accept, unfriend
-// ============================================================================
 function Friends({ me, users }) {
   let [friends, setFriends] = useState([]);
   let [incoming, setIncoming] = useState([]);
@@ -208,7 +206,6 @@ function Friends({ me, users }) {
     loadAll();
   }
 
-  // Find players to add — exclude self, existing friends, pending in either direction
   let excludedIds = new Set([
     me.user_id,
     ...friends.map(f => f.user_id),
@@ -369,9 +366,6 @@ function Friends({ me, users }) {
   );
 }
 
-// ============================================================================
-// MY PROFILE — personal page for players
-// ============================================================================
 function MyProfile({ me, users, sessions, achievements, reviews, games }) {
   let myUser = users.find(u => u.username === me.username) || { username: me.username, total_score: 0, total_kills: 0, achievements: 0, games_played: 0, country: me.country || "Unknown", email: me.email };
   let mySessions = sessions.filter(s => s.username === me.username);
